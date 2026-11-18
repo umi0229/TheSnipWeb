@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>剪煞 THE SNIP | 1950台式民俗第一人稱恐怖解謎</title>
-    <!-- 引入復古宋體字型 -->
+    <title>剪煞 THE SNIP | 序幕與第一幕遊戲展示</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
@@ -16,7 +15,6 @@
             --text-muted: #8a8578;
             --accent-gold: #c5a059;
             --accent-red: #8b1e1e;
-            --accent-cyan: #2a5c5a;
             --paper-bg: #d9cfb8;
             --paper-text: #241f18;
         }
@@ -129,7 +127,7 @@
             padding: 0 20px;
             position: relative;
             background: linear-gradient(to bottom, rgba(8,8,10,0.45) 0%, rgba(8,8,10,0.75) 75%, var(--bg-dark) 100%),
-                        url('file:///C:/Users/%E5%BC%B5%E7%B0%A1%E8%A9%A9%E8%8A%B8/Desktop/TheSnip_Web/%E8%80%81%E5%BB%9F%E6%AD%A3%E6%AE%BF.png') center/cover no-repeat,
+                        url('hero_bg.png') center/cover no-repeat,
                         radial-gradient(circle at center, #1d1414 0%, #08080a 100%);
         }
 
@@ -206,6 +204,7 @@
         .btn-secondary:hover {
             background-color: rgba(197, 160, 89, 0.15);
         }
+
         section {
             padding: 100px 8%;
             max-width: 1280px;
@@ -373,7 +372,6 @@
             color: var(--accent-gold);
         }
 
-        /* 開發團隊與頁尾 */
         footer {
             background: #050507;
             border-top: 1px solid #24201b;
@@ -418,48 +416,44 @@
 </head>
 <body>
 
-    <!-- 手電筒互動光圈遮罩 -->
     <div id="flashlight-overlay"></div>
 
-    <!-- 頂部導覽列 -->
     <nav>
         <a href="#" class="nav-logo">剪煞 THE SNIP</a>
         <div class="nav-links">
-            <a href="#story">調查檔案</a>
-            <a href="#features">核心玩法</a>
+            <a href="#story">序幕與世界觀</a>
+            <a href="#features">核心機制</a>
             <a href="#media">實機展示</a>
             <a href="#team">製作團隊</a>
             <button class="btn-flashlight" id="toggle-light">手電筒：開啟</button>
         </div>
     </nav>
 
-    <!-- 首屏主視覺 -->
     <header class="hero">
         <div class="hero-tag">1950 KAOHSIUNG FOLKLORE HORROR</div>
         <h1 class="hero-title">剪煞</h1>
         <div class="hero-subtitle">THE SNIP</div>
         <p class="hero-slogan">
-            一九五〇，高雄林園。當工業巨輪碾過百年龍脈，<br>
-            唯有握緊剪刀，方能剪斷纏繞不散的歷史血煞。
+            一九五〇，高雄林園。從主角房間的詭異異象開端，<br>
+            逐步揭開百年龍脈與工業血煞的禁忌真相。
         </p>
         <div class="hero-btns">
             <a href="#media" class="btn-primary">觀看實機展示</a>
-            <a href="#story" class="btn-secondary">查閱調查筆記</a>
+            <a href="#story" class="btn-secondary">查閱調查檔案</a>
         </div>
     </header>
 
-    <!-- 故事背景與兩幕架構 -->
     <section id="story">
         <div class="section-header">
-            <h2>世界觀</h2>
-            <p>ARCHIVE FILES // 1953 清水巖文史調查紀錄</p>
+            <h2>序幕與第一幕劇情架構</h2>
+            <p>CHRONICLES // 從主角房間到清水巖老廟</p>
         </div>
 
         <div class="lore-paper">
             <div class="stamp">極機密檔案</div>
-            <h3>事件背景：被掩埋的儀式</h3>
+            <h3>劇情推進與探索舞台</h3>
             <p>
-                1950 年代初期，高雄林園地區正值戰後重工業開發與軍事設施遺留交錯的年代。玩家將扮演一名深入禁區的調查者，在封閉已久的古老廟宇與地底坑道中，透過殘留的文史筆記與靈異顯影，拼湊出一段關於「風水」與「工業污染」的真相。
+                本專題目前完整呈現「序幕」與「第一幕」的沈浸式互動內容。玩家將從封閉壓抑的主角房間出發，在日常與詭異交錯的氛圍中尋找線索，最終踏入殘存百年風水的清水巖老廟。
             </p>
 
             <div class="lore-grid">
@@ -470,65 +464,60 @@
                     </p>
                 </div>
                 <div class="act-box">
-                    <h4>第一幕｜老廟正殿</h4>
+                    <h4>第一幕｜清水巖老廟正殿</h4>
                     <p>
-                        踏入塵封多年的老廟正殿，在搖曳的紅燭微光中解開祖師公桌案與公事包機關，尋獲鎮煞法器「古鐵剪刀」，並於暗房顯影中窺見第一道異常線索。
+                        深入塵封多年的老廟正殿，在搖曳的紅燭微光中解開桌案與公事包機關，尋獲關鍵鎮煞法器「古鐵剪刀」，並解鎖 ESC 整合式圖鑑系統。
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 核心玩法特色 -->
     <section id="features">
         <div class="section-header">
-            <h2>核心玩法機制</h2>
+            <h2>核心玩法與系統特色</h2>
             <p>GAMEPLAY MECHANICS // 第一人稱沉浸式解謎</p>
         </div>
 
         <div class="features-grid">
             <div class="feature-card">
-                <span class="feature-icon">✂</span>
+                <span class="feature-icon">🚪</span>
                 <h3>房間探索與互動</h3>
                 <p>
-                    在序幕主角房間中透過第一人稱視角調查物件、觸發敘事，建立懸疑的開場氛圍。
+                    在序幕主角房間中透過第一人稱視角調查物件、觸發敘事，建立詭異懸疑的開場氛圍。
                 </p>
             </div>
             <div class="feature-card">
-                <span class="feature-icon">📷</span>
-                <h3>拍立得顯影</h3>
+                <span class="feature-icon">✂</span>
+                <h3>古鐵剪刀．破煞</h3>
                 <p>
-                    利用1950年代老式相機與感光底片，在黑暗中透過閃光燈瞬間顯影，照出肉眼無法察覺的符咒與隱藏密碼。
+                    手持清末台灣傳統鐵匠鍛造的鎮煞剪刀，剪斷阻擋去路的黑色煞氣絲線與邪祟結界。
                 </p>
             </div>
             <div class="feature-card">
                 <span class="feature-icon">📜</span>
-                <h3>考據圖鑑．推演</h3>
+                <h3>ESC 整合圖鑑系統</h3>
                 <p>
-                    整合於ESC系統中的隨身調查筆記，收錄所有收集到的鎮煞古物、老照片與地方異聞，協助玩家理清線索邏輯。
+                    隨身調查筆記與設定選單合而為一，收錄所有收集到的鎮煞古物、老照片與背景文史。
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- 實機影片和畫面截圖 -->
     <section id="media">
         <div class="section-header">
             <h2>實機畫面與系統展示</h2>
-            <p>MEDIA & SCREENSHOTS // 目前開發成果</p>
+            <p>MEDIA & SCREENSHOTS // 序幕與第一幕成果</p>
         </div>
 
         <div class="media-showcase">
-            <!-- 影片嵌入區塊：將下方 iframe 的 src 換成你們上傳到 YouTube 的影片網址即可 -->
             <div class="video-wrapper">
                 <p style="color: var(--accent-gold); letter-spacing: 3px; font-size: 1.1rem; margin-bottom: 12px;">
-                    [ 實機遊玩與 ESC 圖鑑系統展示影片 ]
+                    [ 序幕房間與第一幕老廟實機展示影片 ]
                 </p>
                 <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 500px; text-align: center;">
+                    提示：可將實機錄影上傳至 YouTube（設為不公開），並將此處替換為 YouTube 嵌入代碼。
                 </p>
-                <!-- 範例 YouTube 嵌入碼（取消註解並填入影片ID即可使用）：
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/你的影片ID" frameborder="0" allowfullscreen></iframe>
-                -->
             </div>
 
             <div class="gallery-grid">
@@ -548,15 +537,12 @@
         </div>
     </section>
 
-    <!-- 製作團隊與頁尾 -->
     <footer id="team">
         <div class="team-info">
             <h3>開發團隊 // 《剪煞》專題製作組</h3>
             <div class="team-roles">
-                <span>企劃／劇本：張簡詩芸</span>
-                <span>3D場景／美術：洪櫻芷、黃子維</span>
-                <span>主程式：孫正</span>
-                <span>指導教授：許文吉</span>
+                <span>企劃／劇本／UI 美術：張簡詩芸</span>
+                <span>3D 場景／程式整合：子維、阿芸</span>
             </div>
             <p style="color: var(--text-muted); font-size: 0.9rem;">
                 平台：PC (Windows) ｜ 類型：第一人稱台式民俗恐怖解謎 ｜ 引擎：Unity
@@ -567,7 +553,6 @@
         </div>
     </footer>
 
-    <!-- 互動腳本：手電筒微光追蹤 -->
     <script>
         const overlay = document.getElementById('flashlight-overlay');
         const toggleBtn = document.getElementById('toggle-light');
