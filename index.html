@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剪煞 THE SNIP | 1950台式民俗第一人稱恐怖解謎</title>
+    <!-- 引入復古宋體字型 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #08080a;
+            --bg-panel: #111115;
+            --text-main: #d8d4c8;
+            --text-muted: #8a8578;
+            --accent-gold: #c5a059;
+            --accent-red: #8b1e1e;
+            --accent-cyan: #2a5c5a;
+            --paper-bg: #d9cfb8;
+            --paper-text: #241f18;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Noto Serif TC', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        #flashlight-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            background: radial-gradient(
+                circle 260px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 245, 220, 0.04) 0%,
+                rgba(8, 8, 10, 0.55) 70%,
+                rgba(5, 5, 7, 0.85) 100%
+            );
+            transition: opacity 0.4s ease;
+        }
+
+        #flashlight-overlay.off {
+            opacity: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(8,8,10,0.95), rgba(8,8,10,0));
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .btn-flashlight {
+            background: rgba(197, 160, 89, 0.15);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 6px 14px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-flashlight:hover {
+            background: var(--accent-gold);
+            color: #000;
+        }
+
+        header.hero {
+            height: 100vh;
+            min-height: 650px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(8,8,10,0.45) 0%, rgba(8,8,10,0.75) 75%, var(--bg-dark) 100%),
+                        url('file:///C:/Users/%E5%BC%B5%E7%B0%A1%E8%A9%A9%E8%8A%B8/Desktop/TheSnip_Web/%E8%80%81%E5%BB%9F%E6%AD%A3%E6%AE%BF.png') center/cover no-repeat,
+                        radial-gradient(circle at center, #1d1414 0%, #08080a 100%);
+        }
+
+        .hero-tag {
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            color: var(--accent-gold);
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.4);
+            padding-bottom: 6px;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            font-weight: 900;
+            letter-spacing: 16px;
+            color: #f0ece1;
+            text-shadow: 0 0 30px rgba(139, 30, 30, 0.7), 0 4px 12px #000;
+            margin-bottom: 8px;
+            padding-left: 16px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            letter-spacing: 10px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            text-transform: uppercase;
+        }
+
+        .hero-slogan {
+            max-width: 620px;
+            font-size: 1.15rem;
+            color: #ccc6b8;
+            margin-bottom: 42px;
+            letter-spacing: 2px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            padding: 14px 36px;
+            background-color: var(--accent-red);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 3px;
+            border: 1px solid #b82929;
+            box-shadow: 0 0 20px rgba(139, 30, 30, 0.5);
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #a82424;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            padding: 14px 36px;
+            background-color: rgba(17, 17, 21, 0.8);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 3px;
+            border: 1px solid var(--accent-gold);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(197, 160, 89, 0.15);
+        }
+        section {
+            padding: 100px 8%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            letter-spacing: 8px;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            font-size: 0.95rem;
+        }
+
+        .lore-paper {
+            background-color: var(--paper-bg);
+            color: var(--paper-text);
+            padding: 56px 64px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 60px rgba(82, 65, 40, 0.35);
+            border: 1px solid #8c7b60;
+        }
+
+        .stamp {
+            position: absolute;
+            top: 36px;
+            right: 48px;
+            border: 3px solid #9e2222;
+            color: #9e2222;
+            padding: 6px 14px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            transform: rotate(8deg);
+            opacity: 0.85;
+        }
+
+        .lore-paper h3 {
+            font-size: 1.6rem;
+            border-bottom: 2px solid #5c4e38;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            letter-spacing: 3px;
+        }
+
+        .lore-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 32px;
+        }
+
+        .act-box {
+            background: rgba(36, 31, 24, 0.06);
+            padding: 24px;
+            border-left: 4px solid var(--accent-red);
+        }
+
+        .act-box h4 {
+            font-size: 1.2rem;
+            color: #7a1818;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--bg-panel);
+            border: 1px solid #2c2823;
+            padding: 36px 28px;
+            position: relative;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.35rem;
+            letter-spacing: 3px;
+            margin-bottom: 14px;
+            color: #f0ece1;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
+        .media-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #0d0d10;
+            border: 1px solid var(--accent-gold);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 16 / 9;
+            background: #141418;
+            border: 1px solid #332e27;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 12px 16px;
+            font-size: 0.88rem;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+        }
+
+        /* 開發團隊與頁尾 */
+        footer {
+            background: #050507;
+            border-top: 1px solid #24201b;
+            padding: 64px 8% 40px;
+            text-align: center;
+        }
+
+        .team-info {
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        .team-info h3 {
+            color: var(--accent-gold);
+            letter-spacing: 4px;
+            margin-bottom: 16px;
+        }
+
+        .team-roles {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: #555;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .lore-grid { grid-template-columns: 1fr; }
+            .lore-paper { padding: 36px 24px; }
+            .stamp { position: static; display: inline-block; margin-bottom: 16px; }
+            .nav-links a { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 手電筒互動光圈遮罩 -->
+    <div id="flashlight-overlay"></div>
+
+    <!-- 頂部導覽列 -->
+    <nav>
+        <a href="#" class="nav-logo">剪煞 THE SNIP</a>
+        <div class="nav-links">
+            <a href="#story">調查檔案</a>
+            <a href="#features">核心玩法</a>
+            <a href="#media">實機展示</a>
+            <a href="#team">製作團隊</a>
+            <button class="btn-flashlight" id="toggle-light">手電筒：開啟</button>
+        </div>
+    </nav>
+
+    <!-- 首屏主視覺 -->
+    <header class="hero">
+        <div class="hero-tag">1950 KAOHSIUNG FOLKLORE HORROR</div>
+        <h1 class="hero-title">剪煞</h1>
+        <div class="hero-subtitle">THE SNIP</div>
+        <p class="hero-slogan">
+            一九五〇，高雄林園。當工業巨輪碾過百年龍脈，<br>
+            唯有握緊剪刀，方能剪斷纏繞不散的歷史血煞。
+        </p>
+        <div class="hero-btns">
+            <a href="#media" class="btn-primary">觀看實機展示</a>
+            <a href="#story" class="btn-secondary">查閱調查筆記</a>
+        </div>
+    </header>
+
+    <!-- 故事背景與兩幕架構 -->
+    <section id="story">
+        <div class="section-header">
+            <h2>世界觀</h2>
+            <p>ARCHIVE FILES // 1953 清水巖文史調查紀錄</p>
+        </div>
+
+        <div class="lore-paper">
+            <div class="stamp">極機密檔案</div>
+            <h3>事件背景：被掩埋的儀式</h3>
+            <p>
+                1950 年代初期，高雄林園地區正值戰後重工業開發與軍事設施遺留交錯的年代。玩家將扮演一名深入禁區的調查者，在封閉已久的古老廟宇與地底坑道中，透過殘留的文史筆記與靈異顯影，拼湊出一段關於「風水」與「工業污染」的真相。
+            </p>
+
+            <div class="lore-grid">
+                <div class="act-box">
+                    <h4>序幕｜主角房間</h4>
+                    <p>
+                        故事的起點。玩家在充滿 1950 年代生活氣息的主角房間中醒來，透過檢視桌上泛黃的書信、道具與環境細節，帶出詭異的開端與調查契機。
+                    </p>
+                </div>
+                <div class="act-box">
+                    <h4>第一幕｜老廟正殿</h4>
+                    <p>
+                        踏入塵封多年的老廟正殿，在搖曳的紅燭微光中解開祖師公桌案與公事包機關，尋獲鎮煞法器「古鐵剪刀」，並於暗房顯影中窺見第一道異常線索。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心玩法特色 -->
+    <section id="features">
+        <div class="section-header">
+            <h2>核心玩法機制</h2>
+            <p>GAMEPLAY MECHANICS // 第一人稱沉浸式解謎</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">✂</span>
+                <h3>房間探索與互動</h3>
+                <p>
+                    在序幕主角房間中透過第一人稱視角調查物件、觸發敘事，建立懸疑的開場氛圍。
+                </p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">📷</span>
+                <h3>拍立得顯影</h3>
+                <p>
+                    利用1950年代老式相機與感光底片，在黑暗中透過閃光燈瞬間顯影，照出肉眼無法察覺的符咒與隱藏密碼。
+                </p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">📜</span>
+                <h3>考據圖鑑．推演</h3>
+                <p>
+                    整合於ESC系統中的隨身調查筆記，收錄所有收集到的鎮煞古物、老照片與地方異聞，協助玩家理清線索邏輯。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 實機影片和畫面截圖 -->
+    <section id="media">
+        <div class="section-header">
+            <h2>實機畫面與系統展示</h2>
+            <p>MEDIA & SCREENSHOTS // 目前開發成果</p>
+        </div>
+
+        <div class="media-showcase">
+            <!-- 影片嵌入區塊：將下方 iframe 的 src 換成你們上傳到 YouTube 的影片網址即可 -->
+            <div class="video-wrapper">
+                <p style="color: var(--accent-gold); letter-spacing: 3px; font-size: 1.1rem; margin-bottom: 12px;">
+                    [ 實機遊玩與 ESC 圖鑑系統展示影片 ]
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 500px; text-align: center;">
+                </p>
+                <!-- 範例 YouTube 嵌入碼（取消註解並填入影片ID即可使用）：
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/你的影片ID" frameborder="0" allowfullscreen></iframe>
+                -->
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src=""1.png"" alt="主角房間" onerror="this.src='https://placehold.co/800x450/141418/c5a059?text=Act+1+Temple+Scene'">
+                    <div class="gallery-caption">序幕：主角房間</div>
+                </div>
+                <div class="gallery-item">
+                    <img src=""temple.png"" alt="老廟正殿" onerror="this.src='https://placehold.co/800x450/141418/c5a059?text=Act+1+Temple+Scene'">
+                    <div class="gallery-caption">第一幕：清水巖老廟正殿場景</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="screenshot_ui.jpg" alt="ESC 圖鑑介面" onerror="this.src='https://placehold.co/800x450/141418/c5a059?text=ESC+Codex+%26+Settings+UI'">
+                    <div class="gallery-caption">系統介面ESC設定與圖鑑</div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 製作團隊與頁尾 -->
+    <footer id="team">
+        <div class="team-info">
+            <h3>開發團隊 // 《剪煞》專題製作組</h3>
+            <div class="team-roles">
+                <span>企劃／劇本：張簡詩芸</span>
+                <span>3D場景／美術：洪櫻芷、黃子維</span>
+                <span>主程式：孫正</span>
+                <span>指導教授：許文吉</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                平台：PC (Windows) ｜ 類型：第一人稱台式民俗恐怖解謎 ｜ 引擎：Unity
+            </p>
+        </div>
+        <div class="copyright">
+            © 2026 THE SNIP 剪煞專題製作團隊. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <!-- 互動腳本：手電筒微光追蹤 -->
+    <script>
+        const overlay = document.getElementById('flashlight-overlay');
+        const toggleBtn = document.getElementById('toggle-light');
+        let isLightOn = true;
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isLightOn) return;
+            overlay.style.setProperty('--mouse-x', e.clientX + 'px');
+            overlay.style.setProperty('--mouse-y', e.clientY + 'px');
+        });
+
+        toggleBtn.addEventListener('click', () => {
+            isLightOn = !isLightOn;
+            overlay.classList.toggle('off', !isLightOn);
+            toggleBtn.textContent = isLightOn ? '手電筒：開啟' : '手電筒：關閉';
+        });
+    </script>
+</body>
+</html>
