@@ -511,13 +511,23 @@
         </div>
 
         <div class="media-showcase">
-            <div class="video-wrapper">
-                <p style="color: var(--accent-gold); letter-spacing: 3px; font-size: 1.1rem; margin-bottom: 12px;">
-                    [ 序幕房間與第一幕老廟實機展示影片 ]
-                </p>
-                <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 500px; text-align: center;">
-                    提示：可將實機錄影上傳至 YouTube（設為不公開），並將此處替換為 YouTube 嵌入代碼。
-                </p>
+            <!-- 兩部實機展示影片並排區塊 -->
+            <div class="videos-grid">
+                <!-- 序幕影片 -->
+                <div class="video-block">
+                    <h3 class="video-label">序幕｜主角房間實機展示</h3>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/_2D1tGndmiU" title="序幕實機展示" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- 序幕影片 -->
+                <div class="video-block">
+                    <h3 class="video-label">第一幕｜廢墟老廟實機展示</h3>
+                    <div class="video-wrapper">
+                        <iframe src="https://youtu.be/U7cJENmRTRs" title="第一幕實機展示" allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
 
             <div class="gallery-grid">
@@ -530,7 +540,7 @@
                     <div class="gallery-caption">第一幕：老廟正殿場景</div>
                 </div>
                 <div class="gallery-item">
-                    <img src="screenshot_ui.png" alt="ESC 圖鑑介面" onerror="this.src='https://placehold.co/800x450/141418/c5a059?text=ESC+Codex+%26+Settings+UI'">
+                    <img src="ui.png" alt="ESC 圖鑑介面" onerror="this.src='https://placehold.co/800x450/141418/c5a059?text=ESC+Codex+%26+Settings+UI'">
                     <div class="gallery-caption">系統介面ESC設定與圖鑑</div>
                 </div>
             </div>
@@ -541,8 +551,9 @@
         <div class="team-info">
             <h3>開發團隊 // 《剪煞》專題製作組</h3>
             <div class="team-roles">
-                <span>企劃／劇本／UI 美術：張簡詩芸</span>
-                <span>3D 場景／程式整合：子維、阿芸</span>
+                <span> 企劃／劇本／音樂：張簡詩芸</span>
+                <span> 美術／音效／音樂：黃子維、洪櫻芷</span>
+                <span> 主程式／UI：孫正</span>
             </div>
             <p style="color: var(--text-muted); font-size: 0.9rem;">
                 平台：PC (Windows) ｜ 類型：第一人稱台式民俗恐怖解謎 ｜ 引擎：Unity
